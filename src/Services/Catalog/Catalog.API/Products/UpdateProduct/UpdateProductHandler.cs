@@ -5,6 +5,16 @@ public record UpdateProductCommand(Guid Id, string Name, string Description, str
 
 public record UpdateProductResult(bool IsSuccess);
 
+public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+{
+    public UpdateProductCommandValidator()
+    {
+        RuleFor(c => c.Id).NotEmpty().WithName("Product ID");
+        RuleFor(c => c.Name).NotEmpty().Length(2, 150);
+        RuleFor(c => c.Price).GreaterThan(decimal.Zero);
+    }
+}
+
 internal class UpdateProductCommandHandler(IDocumentSession session, ILogger<UpdateProductCommandHandler> logger)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
