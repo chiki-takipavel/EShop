@@ -1,6 +1,6 @@
 ﻿namespace Catalog.API.Exceptions;
 
-internal class ProductNotFoundException : Exception
+internal class ProductNotFoundException : NotFoundException
 {
-    internal ProductNotFoundException() : base("Product not found!") { }
+    internal ProductNotFoundException(Guid id) : base("Product", id) { }
 }
