@@ -12,7 +12,7 @@ public class LoggingBehavior<TRequest, TResponse>
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        logger.LogInformation("[START] Handle Request={Request} - Response={Response} - RequestData={@RequestData}.",
+        logger.LogInformation("[START] Handle Request={RequestName} - Response={ResponseName} - RequestData={@RequestData}.",
             typeof(TRequest).Name, typeof(TResponse).Name, request);
 
         var timer = new Stopwatch();
