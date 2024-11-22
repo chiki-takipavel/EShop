@@ -11,6 +11,12 @@ builder.Services.AddMediatR(config =>
 ValidatorOptions.Global.LanguageManager.Enabled = false;
 builder.Services.AddValidatorsFromAssembly(assembly);
 
+builder.Services.AddMarten(options =>
+{
+    options.Connection(builder.Configuration.GetConnectionString("Database")!);
+    options.Schema.For<ShoppingCart>().Identity(c => c.UserName);
+}).UseLightweightSessions();
+
 builder.Services.AddCarter();
 
 var app = builder.Build();
