@@ -1,6 +1,6 @@
 ﻿namespace Cart.API.Cart.GetCart;
 
-public record GetCartResponse(string UserName);
+public record GetCartResponse(ShoppingCart Cart);
 
 public class GetCartEndpoint : ICarterModule
 {
