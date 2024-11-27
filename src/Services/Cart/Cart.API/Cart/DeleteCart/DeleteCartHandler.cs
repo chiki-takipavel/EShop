@@ -12,10 +12,13 @@ public class DeleteCartValidator : AbstractValidator<DeleteCartCommand>
     }
 }
 
-public class DeleteCartCommandHandler : ICommandHandler<DeleteCartCommand, DeleteCartResult>
+public class DeleteCartCommandHandler(ICartRepository repository)
+    : ICommandHandler<DeleteCartCommand, DeleteCartResult>
 {
     public async Task<DeleteCartResult> Handle(DeleteCartCommand command, CancellationToken cancellationToken)
     {
+        await repository.DeleteCart(command.UserName, cancellationToken);
+
         return new DeleteCartResult(true);
     }
 }

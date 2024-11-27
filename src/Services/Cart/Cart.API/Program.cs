@@ -19,7 +19,13 @@ builder.Services.AddMarten(options =>
 
 builder.Services.AddCarter();
 
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 var app = builder.Build();
+
+app.UseExceptionHandler(_ => { });
 
 app.MapCarter();
 

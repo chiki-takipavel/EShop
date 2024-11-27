@@ -12,10 +12,13 @@ public class GetCartQueryValidator : AbstractValidator<GetCartQuery>
     }
 }
 
-public class GetCartQueryHandler : IQueryHandler<GetCartQuery, GetCartResult>
+public class GetCartQueryHandler(ICartRepository repository)
+    : IQueryHandler<GetCartQuery, GetCartResult>
 {
     public async Task<GetCartResult> Handle(GetCartQuery query, CancellationToken cancellationToken)
     {
-        return new GetCartResult(new ShoppingCart("default"));
+        ShoppingCart cart = await repository.GetCart(query.UserName, cancellationToken);
+
+        return new GetCartResult(cart);
     }
 }
