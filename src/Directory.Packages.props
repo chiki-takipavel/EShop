@@ -10,10 +10,12 @@
     <PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageVersion Include="Mapster" Version="7.4.0" />
-    <PackageVersion Include="Marten" Version="7.33.0" />
+    <PackageVersion Include="Marten" Version="7.33.1" />
     <PackageVersion Include="MediatR" Version="12.4.1" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageVersion Include="NodaTime" Version="3.2.0" />
+    <PackageVersion Include="Scrutor" Version="5.0.2" />
     <PackageVersion Include="System.Text.Json" Version="9.0.0" />
   </ItemGroup>
 </Project>

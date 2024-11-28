@@ -19,7 +19,14 @@ builder.Services.AddMarten(options =>
 
 builder.Services.AddCarter();
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "Cart";
+});
+
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.Decorate<ICartRepository, CachedCartRepository>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
