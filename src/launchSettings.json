@@ -5,6 +5,7 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "catalog.api": "StartDebugging",
+        "cart.api": "StartDebugging",
         "catalog.db": "StartWithoutDebugging",
         "cart.db": "StartWithoutDebugging",
         "distributedcache": "StartWithoutDebugging"
