@@ -10,5 +10,7 @@ public class DiscountContext(DbContextOptions<DiscountContext> options) : DbCont
             new Coupon { Id = 1, ProductName = "IPhone X", Description = "IPhone X Discount", Amount = 200 },
             new Coupon { Id = 2, ProductName = "Samsung 10", Description = "Samsung 10 Discount", Amount = 150 }
         );
+
+        modelBuilder.Entity<Coupon>().Property(c => c.ProductName).UseCollation("NOCASE");
     }
 }
