@@ -6,6 +6,7 @@
       "serviceActions": {
         "catalog.api": "StartDebugging",
         "cart.api": "StartDebugging",
+        "discount.grpc": "StartDebugging",
         "catalog.db": "StartWithoutDebugging",
         "cart.db": "StartWithoutDebugging",
         "distributedcache": "StartWithoutDebugging"
