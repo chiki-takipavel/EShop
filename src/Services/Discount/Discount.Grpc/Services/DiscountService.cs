@@ -7,7 +7,7 @@ public class DiscountService(DiscountContext dbContext, ILogger<DiscountService>
     {
         var coupon = await dbContext.Coupones.AsNoTracking()
             .FirstOrDefaultAsync(c => c.ProductName == request.ProductName)
-            ?? new Coupon { ProductName = "No Discount", Amount = 0 };
+            ?? new Coupon { ProductName = "No Discount", Description = "No Discount", Amount = 0 };
 
         logger.LogInformation("Discount is retrieved for ProductName: {ProductName}, Amount: {Amount}.",
             coupon.ProductName, coupon.Amount);
