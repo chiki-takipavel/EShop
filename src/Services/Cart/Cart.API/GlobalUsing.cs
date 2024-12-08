@@ -6,6 +6,7 @@ global using Cart.API.Domain;
 global using Cart.API.Exceptions;
 global using Cart.API.Repositories;
 global using Carter;
+global using Discount.Grpc;
 global using FluentValidation;
 global using HealthChecks.UI.Client;
 global using Mapster;

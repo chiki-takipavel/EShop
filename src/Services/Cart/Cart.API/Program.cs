@@ -11,13 +11,13 @@ builder.Services.AddMediatR(config =>
 ValidatorOptions.Global.LanguageManager.Enabled = false;
 builder.Services.AddValidatorsFromAssembly(assembly);
 
+builder.Services.AddCarter();
+
 builder.Services.AddMarten(options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
     options.Schema.For<ShoppingCart>().Identity(c => c.UserName);
 }).UseLightweightSessions();
-
-builder.Services.AddCarter();
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
@@ -27,6 +27,11 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.Decorate<ICartRepository, CachedCartRepository>();
+
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+});
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
