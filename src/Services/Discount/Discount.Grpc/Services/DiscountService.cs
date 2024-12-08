@@ -7,10 +7,10 @@ public class DiscountService(DiscountContext dbContext, ILogger<DiscountService>
     {
         var coupon = await dbContext.Coupones.AsNoTracking()
             .FirstOrDefaultAsync(c => c.ProductName == request.ProductName)
-            ?? new Coupon { ProductName = "No Discount", Description = "No Discount", Amount = 0 };
+            ?? new Coupon { ProductName = "No Discount", Description = "No Discount", Percentage = 0 };
 
-        logger.LogInformation("Discount is retrieved for ProductName: {ProductName}, Amount: {Amount}.",
-            coupon.ProductName, coupon.Amount);
+        logger.LogInformation("Discount is retrieved for ProductName: {ProductName}, Percentage: {Percentage}.",
+            coupon.ProductName, coupon.Percentage);
 
         var couponModel = coupon.Adapt<CouponModel>();
 
@@ -22,11 +22,16 @@ public class DiscountService(DiscountContext dbContext, ILogger<DiscountService>
         var coupon = request.Coupon.Adapt<Coupon>()
             ?? throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object."));
 
+        if (coupon.Percentage is < 1 or > 99)
+        {
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Percentage must be in range 1..99."));
+        }
+
         dbContext.Coupones.Add(coupon);
         await dbContext.SaveChangesAsync();
 
-        logger.LogInformation("Discount is successfully created. ProductName: {ProductName}, Amount: {Amount}.",
-            coupon.ProductName, coupon.Amount);
+        logger.LogInformation("Discount is successfully created. ProductName: {ProductName}, Percentage: {Percentage}.",
+            coupon.ProductName, coupon.Percentage);
 
         var couponModel = coupon.Adapt<CouponModel>();
 
@@ -38,11 +43,16 @@ public class DiscountService(DiscountContext dbContext, ILogger<DiscountService>
         var coupon = request.Coupon.Adapt<Coupon>()
             ?? throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object."));
 
+        if (coupon.Percentage is < 1 or > 99)
+        {
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Percentage must be in range 1..99."));
+        }
+
         dbContext.Coupones.Update(coupon);
         await dbContext.SaveChangesAsync();
 
-        logger.LogInformation("Discount is successfully updated. ProductName: {ProductName}, Amount: {Amount}.",
-            coupon.ProductName, coupon.Amount);
+        logger.LogInformation("Discount is successfully updated. ProductName: {ProductName}, Percentage: {Percentage}.",
+            coupon.ProductName, coupon.Percentage);
 
         var couponModel = coupon.Adapt<CouponModel>();
 
@@ -58,8 +68,8 @@ public class DiscountService(DiscountContext dbContext, ILogger<DiscountService>
         dbContext.Coupones.Remove(coupon);
         await dbContext.SaveChangesAsync();
 
-        logger.LogInformation("Discount is successfully deleted. ProductName: {ProductName}, Amount: {Amount}.",
-            coupon.ProductName, coupon.Amount);
+        logger.LogInformation("Discount is successfully deleted. ProductName: {ProductName}, Percentage: {Percentage}.",
+            coupon.ProductName, coupon.Percentage);
 
         return new DeleteDiscountResponse { IsSuccess = true };
     }
