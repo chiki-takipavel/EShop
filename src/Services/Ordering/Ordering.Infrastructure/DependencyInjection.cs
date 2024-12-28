@@ -11,7 +11,7 @@ public static class DependencyInjection
         string connectionString = configuration.GetConnectionString("Database")!;
 
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseSqlServer(connectionString, o => o.UseNodaTime()));
 
         return services;
     }
