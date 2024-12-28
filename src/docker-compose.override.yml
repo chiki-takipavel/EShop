@@ -31,6 +31,15 @@ services:
     ports:
       - "6379:6379"
 
+  order.db:
+    container_name: Order.DB
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=
+    restart: always
+    ports:
+      - "1433:1433"
+
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
