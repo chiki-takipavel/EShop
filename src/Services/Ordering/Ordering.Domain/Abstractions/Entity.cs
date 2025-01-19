@@ -1,8 +1,12 @@
 ﻿namespace Ordering.Domain.Abstractions;
 
-public abstract class Entity<T>
+public abstract class Entity<T> : Entity
 {
     public T Id { get; set; } = default!;
+}
+
+public abstract class Entity
+{
     public Instant? CreatedAt { get; set; }
     public string? CreatedBy { get; set; }
     public Instant? LastModified { get; set; }
