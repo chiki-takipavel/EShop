@@ -8,8 +8,8 @@ internal class UpdateOrderCommandValidator : AbstractValidator<UpdateOrderComman
 {
     public UpdateOrderCommandValidator()
     {
-        RuleFor(x => x.Order.Id).NotEmpty();
-        RuleFor(x => x.Order.OrderName).NotEmpty().WithName("Name");
-        RuleFor(x => x.Order.CustomerId).NotEmpty();
+        RuleFor(c => c.Order.Id).NotEmpty();
+        RuleFor(c => c.Order.OrderName).NotEmpty().WithName("Name");
+        RuleFor(c => c.Order.CustomerId).NotEmpty();
     }
 }
