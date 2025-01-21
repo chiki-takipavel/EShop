@@ -20,6 +20,8 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString, o => o.UseNodaTime());
         });
 
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+
         return services;
     }
 }

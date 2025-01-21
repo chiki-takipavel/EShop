@@ -2,7 +2,7 @@
 
 namespace Ordering.Infrastructure.Data;
 
-internal class ApplicationDbContext(DbContextOptions options) : DbContext(options)
+internal class ApplicationDbContext(DbContextOptions options) : DbContext(options), IApplicationDbContext
 {
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<Product> Products => Set<Product>();
