@@ -5,6 +5,7 @@
   <ItemGroup>
     <PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
     <PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="9.0.0" />
+    <PackageVersion Include="AspNetCore.HealthChecks.SqlServer" Version="9.0.0" />
     <PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
     <PackageVersion Include="Carter" Version="9.0.0" />
     <PackageVersion Include="FluentValidation" Version="11.11.0" />
@@ -20,7 +21,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.1" />
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
     <PackageVersion Include="NodaTime" Version="3.2.1" />
     <PackageVersion Include="Scrutor" Version="6.0.1" />
     <PackageVersion Include="SimplerSoftware.EntityFrameworkCore.SqlServer.NodaTime" Version="9.0.0" />
