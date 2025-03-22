@@ -1,6 +1,6 @@
-﻿namespace BuildingBlocks.Messaging.Events;
+﻿namespace Cart.API.Dtos;
 
-public record CartCheckoutEvent : IntegrationEvent
+public class CartCheckoutDto
 {
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; }
