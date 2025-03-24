@@ -25,6 +25,9 @@ public class CheckoutCartHandler(ICartRepository repository, IPublishEndpoint pu
         }
 
         var eventMessage = command.CartCheckoutDto.Adapt<CartCheckoutEvent>();
+        eventMessage.Items = cart.Items
+            .Select(i => new CheckoutCartItem(i.ProductId, i.Price, i.Quantity))
+            .ToList();
         eventMessage.TotalPrice = cart.TotalPrice;
 
         await publishEndpoint.Publish(eventMessage, cancellationToken);

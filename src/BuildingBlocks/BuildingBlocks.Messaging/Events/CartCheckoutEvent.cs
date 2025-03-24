@@ -1,9 +1,12 @@
 ﻿namespace BuildingBlocks.Messaging.Events;
 
+public record CheckoutCartItem(Guid ProductId, decimal Price, int Quantity);
+
 public record CartCheckoutEvent : IntegrationEvent
 {
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; }
+    public IReadOnlyCollection<CheckoutCartItem> Items { get; set; } = default!;
     public decimal TotalPrice { get; set; }
 
     public string FirstName { get; set; } = default!;
