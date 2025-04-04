@@ -2,7 +2,7 @@
 
 namespace Ordering.Application.Orders.EventHandlers.Integration;
 
-internal class CartCheckoutEventHandler(ISender sender, ILogger<CartCheckoutEventHandler> logger)
+public class CartCheckoutEventHandler(ISender sender, ILogger<CartCheckoutEventHandler> logger)
     : IConsumer<CartCheckoutEvent>
 {
     public async Task Consume(ConsumeContext<CartCheckoutEvent> context)
