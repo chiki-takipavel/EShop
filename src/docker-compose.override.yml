@@ -31,6 +31,26 @@ services:
     ports:
       - "6379:6379"
 
+  order.db:
+    container_name: Order.DB
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=
+    restart: always
+    ports:
+      - "1433:1433"
+
+  messagebroker:
+    container_name: MessageBroker
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=
+      - RABBITMQ_DEFAULT_PASS=
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -54,10 +74,14 @@ services:
       - ConnectionStrings__Database=Server=cart.db;Port=5432;Database=CartDb;User Id=;Password=;Include Error Detail=true
       - ConnectionStrings__Redis=distributedcache:6379
       - GrpcSettings__DiscountUrl=http://discount.grpc:8080
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+      - MessageBroker__Username=
+      - MessageBroker_Password=
     depends_on:
       - cart.db
       - distributedcache
       - discount.grpc 
+      - messagebroker
     ports:
       - "6001:8080"
       - "6061:8081"
@@ -76,3 +100,25 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  ordering.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=order.db;Database=OrderDb;User Id=;Password=;Encrypt=False;TrustServerCertificate=True
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+      - MessageBroker__Username=
+      - MessageBroker_Password=
+      - FeatureManagement__OrderFullfilment=false
+    depends_on:
+      - order.db
+      - messagebroker 
+    ports:
+      - "6003:8080"
+      - "6063:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

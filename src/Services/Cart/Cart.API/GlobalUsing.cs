@@ -2,7 +2,10 @@
 global using BuildingBlocks.CQRS;
 global using BuildingBlocks.Exceptions;
 global using BuildingBlocks.Exceptions.Handler;
+global using BuildingBlocks.Messaging.Events;
+global using BuildingBlocks.Messaging.MassTransit;
 global using Cart.API.Domain;
+global using Cart.API.Dtos;
 global using Cart.API.Exceptions;
 global using Cart.API.Repositories;
 global using Carter;
@@ -11,5 +14,6 @@ global using FluentValidation;
 global using HealthChecks.UI.Client;
 global using Mapster;
 global using Marten;
+global using MassTransit;
 global using MediatR;
 global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
